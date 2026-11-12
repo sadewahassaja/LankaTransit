@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071b35">
+  <meta name="description" content="LankaTransit — Sri Lanka transport and logistics information platform.">
+  <title>LankaTransit | Sri Lanka Smart Transport</title>
+  <link rel="preconnect" href="https://unpkg.com">
+  <link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="LankaTransit home">
+      <span class="brand-mark">LT</span><span>Lanka<span class="brand-accent">Transit</span><small>SMART TRANSPORT • LOGISTICS</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="#home" class="active">Home</a><a href="#explore">Explore map</a>
+      <a href="#network">Networks</a><a href="#services">Services</a><a href="#logistics">Logistics</a>
+    </nav>
+    <a class="header-cta" href="#explore">Open map <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-grid"></div>
+      <div class="hero-content">
+        <div class="eyebrow"><span class="pulse"></span> SRI LANKA TRANSPORT INTELLIGENCE</div>
+        <h1>Move smarter.<br><span>Connect everything.</span></h1>
+        <p>Explore Sri Lanka’s transport network — from railway lines and highways to airports, seaports and logistics connections.</p>
+        <div class="hero-actions"><a class="btn btn-primary" href="#explore">Explore interactive maps <b>→</b></a><a class="btn btn-ghost" href="#network">Discover the network</a></div>
+        <div class="hero-stats"><div><strong>6</strong><span>Transport modes</span></div><div><strong>3</strong><span>Map perspectives</span></div><div><strong>1</strong><span>Connected platform</span></div></div>
+      </div>
+      <div class="hero-visual">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <div class="globe"><div class="globe-lines"></div><span class="pin pin-a"></span><span class="pin pin-b"></span><span class="pin pin-c"></span><span class="globe-label">SRI LANKA</span></div>
+        <div class="floating-card card-top"><span class="mini-icon">↗</span><div><b>Connected routes</b><small>Road • Rail • Sea • Air</small></div></div>
+        <div class="floating-card card-bottom"><span class="live-dot"></span><div><b>Open map data</b><small>OpenStreetMap powered</small></div></div>
+      </div>
+    </section>
+
+    <section class="search-strip">
+      <div><span class="search-symbol">⌕</span><input id="placeSearch" type="search" placeholder="Search a city, station, airport or destination…" autocomplete="off"><button id="searchBtn">Search location</button></div>
+      <small>Search uses OpenStreetMap geocoding. Results depend on available map data.</small>
+    </section>
+
+    <section class="section map-section" id="explore">
+      <div class="section-heading"><div><span class="eyebrow dark">EXPLORE THE NETWORK</span><h2>Maps that connect <span>Sri Lanka</span></h2><p>Switch between a global view, the island and the expressway network.</p></div><div class="map-status"><span class="live-dot"></span> OpenStreetMap base map</div></div>
+      <div class="map-toolbar">
+        <div class="map-tabs" role="tablist" aria-label="Map views">
+          <button class="map-tab active" data-view="world">🌍 World map</button>
+          <button class="map-tab" data-view="srilanka">🇱🇰 Sri Lanka</button>
+          <button class="map-tab" data-view="highways">🛣 Highway map</button>
+        </div>
+        <div class="layer-controls">
+          <label><input type="checkbox" id="railLayer" checked> Railway</label>
+          <label><input type="checkbox" id="roadLayer"> Main roads</label>
+          <label><input type="checkbox" id="airportLayer" checked> Airports</label>
+          <label><input type="checkbox" id="portLayer" checked> Ports</label>
+        </div>
+      </div>
+      <div class="map-wrap"><div id="map" aria-label="Interactive transport map"></div><div class="map-legend"><b>Map legend</b><span><i class="legend-dot rail"></i> Railway</span><span><i class="legend-dot road"></i> Main roads</span><span><i class="legend-dot airport"></i> Airport</span><span><i class="legend-dot port"></i> Port</span></div></div>
+      <div class="map-note"><span>ⓘ</span> Map roads and geographic features are supplied by OpenStreetMap contributors. Transport overlays are queried from OpenStreetMap data and may be incomplete; they are not live vehicle tracking.</div>
+      <div class="route-planner">
+        <div><span class="eyebrow dark">ROUTE EXPLORER</span><h3>Plan a route</h3><p>Find a suggested driving route between two places.</p></div>
+        <div class="route-fields"><input id="fromPlace" placeholder="From (e.g. Colombo Fort)"><input id="toPlace" placeholder="To (e.g. Kandy)"><button class="btn btn-primary" id="routeBtn">Find route →</button></div>
+        <div id="routeResult" class="route-result">Route distance and duration will appear here. Routing is provided by OSRM and is for guidance only.</div>
+      </div>
+    </section>
+
+    <section class="section" id="network">
+      <div class="section-heading"><div><span class="eyebrow dark">ONE ISLAND. MANY CONNECTIONS.</span><h2>Explore transport <span>networks</span></h2><p>Choose a transport mode to understand how people and goods move.</p></div></div>
+      <div class="network-grid">
+        <article class="network-card"><div class="network-icon blue">🚆</div><div class="card-kicker">01 / RAIL</div><h3>Railway network</h3><p>Explore major railway corridors, stations and connections including the Main Line, Coastal Line, Northern Line and other routes.</p><a href="#explore" data-focus="rail">View railway map <b>→</b></a></article>
+        <article class="network-card"><div class="network-icon orange">🚌</div><div class="card-kicker">02 / BUS</div><h3>Bus transportation</h3><p>Discover SLTB and private bus transport, intercity connections, terminals and route information where datasets are available.</p><a href="https://www.sltb.lk/" target="_blank" rel="noopener">SLTB website <b>↗</b></a></article>
+        <article class="network-card"><div class="network-icon green">🛣</div><div class="card-kicker">03 / ROADS</div><h3>Road network</h3><p>View mapped roads and major road corridors connecting cities, towns, commercial centres and communities.</p><a href="#explore" data-focus="roads">View road map <b>→</b></a></article>
+        <article class="network-card"><div class="network-icon purple">🚘</div><div class="card-kicker">04 / EXPRESSWAYS</div><h3>Expressway network</h3><p>Explore mapped expressway corridors such as E01, E02 and E03, plus available motorway connections.</p><a href="#explore" data-focus="highways">View highway map <b>→</b></a></article>
+        <article class="network-card"><div class="network-icon cyan">✈️</div><div class="card-kicker">05 / AIR</div><h3>Air transportation</h3><p>Locate major airports including Bandaranaike, Mattala and Ratmalana. Flight schedules are not shown unless verified.</p><a href="#explore" data-focus="airports">View airports <b>→</b></a></article>
+        <article class="network-card"><div class="network-icon navy">⚓</div><div class="card-kicker">06 / MARITIME</div><h3>Ports & shipping</h3><p>Explore key port locations and learn how maritime freight links Sri Lanka with international trade routes.</p><a href="#explore" data-focus="ports">View ports <b>→</b></a></article>
+      </div>
+    </section>
+
+    <section class="services-section" id="services"><div class="section section-inner">
+      <div class="section-heading"><div><span class="eyebrow">MOVE WITH CONFIDENCE</span><h2>Transport <span>services</span></h2><p>Quick access to popular transport providers and official information.</p></div></div>
+      <div class="service-grid">
+        <a class="service-card" href="https://pickme.lk/" target="_blank" rel="noopener"><span class="service-logo pickme">P</span><div><b>PickMe</b><small>Ride-hailing • Sri Lanka</small></div><span class="external">↗</span></a>
+        <a class="service-card" href="https://www.uber.com/lk/en/" target="_blank" rel="noopener"><span class="service-logo uber">U</span><div><b>Uber Sri Lanka</b><small>Ride-hailing services</small></div><span class="external">↗</span></a>
+        <a class="service-card" href="https://www.railway.gov.lk/" target="_blank" rel="noopener"><span class="service-logo rail-logo">🚆</span><div><b>Sri Lanka Railways</b><small>Railway information</small></div><span class="external">↗</span></a>
+        <a class="service-card" href="https://www.sltb.lk/" target="_blank" rel="noopener"><span class="service-logo bus-logo">🚌</span><div><b>SLTB</b><small>Public bus services</small></div><span class="external">↗</span></a>
+        <a class="service-card" href="https://www.airport.lk/" target="_blank" rel="noopener"><span class="service-logo air-logo">✈</span><div><b>Airport & Aviation</b><small>Airport information</small></div><span class="external">↗</span></a>
+        <a class="service-card" href="https://www.slpa.lk/" target="_blank" rel="noopener"><span class="service-logo port-logo">⚓</span><div><b>Sri Lanka Ports Authority</b><small>Ports and maritime</small></div><span class="external">↗</span></a>
+      </div>
+      <p class="service-disclaimer">External websites are opened separately. LankaTransit does not provide direct bookings or claim live API integration.</p>
+    </div></section>
+
+    <section class="section logistics" id="logistics"><div class="logistics-copy"><span class="eyebrow dark">BEYOND THE JOURNEY</span><h2>Moving goods.<br><span>Connecting markets.</span></h2><p>Transport is a key part of the supply chain. LankaTransit brings together introductory information about freight, cargo, warehousing, import and export movements, and port connectivity.</p><a class="btn btn-primary" href="https://www.slpa.lk/" target="_blank" rel="noopener">Explore port information ↗</a></div><div class="logistics-tiles"><div class="log-tile large"><span>📦</span><b>Freight & cargo</b><small>Road, rail, air and sea movement</small></div><div class="log-tile"><span>🏭</span><b>Warehousing</b><small>Storage and distribution</small></div><div class="log-tile"><span>🌐</span><b>Import & export</b><small>International trade connections</small></div></div></section>
+
+    <section class="data-banner"><div><span class="eyebrow">TRANSPARENT BY DESIGN</span><h2>Reliable information starts with clear data.</h2><p>Live timetables, bus positions, fares and booking availability are not displayed unless a verified source or integration is available.</p></div><a class="btn btn-light" href="#explore">Explore map →</a></section>
+  </main>
+  <footer><a class="brand footer-brand" href="#home"><span class="brand-mark">LT</span><span>Lanka<span class="brand-accent">Transit</span><small>SMART TRANSPORT • LOGISTICS</small></span></a><p>© 2026 LankaTransit. An independent transport information project.</p><div><a href="#home">Back to top ↑</a></div><small class="credits">Map data © OpenStreetMap contributors • Routing © OSRM</small></footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
